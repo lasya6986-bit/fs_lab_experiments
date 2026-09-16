@@ -1,0 +1,170 @@
+
+<html>
+    <head>
+        <title>Registration-Page</title>
+        <meta name="viewport" content="width=device-width">
+        <meta charset="UTF-8">
+
+        <style>
+            body{
+                background-color: cyan;
+                background-image: url("./bgimage2.jpg");
+            }
+
+            .heading{
+                color: black;
+                text-align: center;
+                padding-top: 20px;
+            }
+
+            .container{
+                margin-left: auto;
+                margin-right: auto;
+                width: 350px;
+                background-color: lavender;
+                box-shadow: 10px 10px 20px grey;
+                border-radius: 20px;
+                display: flex;
+                flex-direction: column;
+                margin-top: 30px;
+                padding: 20px;
+            }
+
+            .container h2{
+                text-align: center;
+                color: darkblue;
+            }
+
+            label{
+                margin-top: 12px;
+                color: darkblue;
+            }
+
+            input, select{
+                height: 30px;
+                margin-top: 5px;
+            }
+
+            .gender{
+                display: flex;
+                gap: 15px;
+                margin-top: 5px;
+            }
+
+            .gender input{
+                height: auto;
+            }
+
+            #btn{
+                background-color: darkblue;
+                color: white;
+                height: 35px;
+                margin-top: 20px;
+                border: none;
+                border-radius: 5px;
+            }
+
+            .login{
+                text-align: center;
+            }
+        </style>
+    </head>
+
+    <body>
+
+        <h1 class="heading">SkillNest Registration</h1>
+
+        <form class="container" id="registerForm">
+
+            <h2>Create Account</h2>
+
+            <label>Full Name</label>
+            <input type="text" name="fullname" placeholder="Enter your full name">
+
+            <label>Username</label>
+            <input type="text" name="username" placeholder="Enter your username">
+
+            <label>Email</label>
+            <input type="email" name="email" placeholder="Enter your email">
+
+            <label>Password</label>
+            <input type="password" name="password" placeholder="Enter your password">
+
+            <label>Confirm Password</label>
+            <input type="password" name="confirmPassword" placeholder="Confirm your password">
+
+            <label>Gender</label>
+
+            <div class="gender">
+                <label>
+                    <input type="radio" name="gender" value="Male"> Male
+                </label>
+
+                <label>
+                    <input type="radio" name="gender" value="Female"> Female
+                </label>
+
+                <label>
+                    <input type="radio" name="gender" value="Other"> Other
+                </label>
+            </div>
+
+            <label>Date of Birth</label>
+            <input type="date" name="dob">
+
+            <label>Select Skill</label>
+
+            <select name="skill">
+                <option value="">Select a skill</option>
+                <option value="Programming">Programming</option>
+                <option value="Web Development">Web Development</option>
+                <option value="Data Science">Data Science</option>
+                <option value="Artificial Intelligence">Artificial Intelligence</option>
+                <option value="Database Management">Database Management</option>
+            </select>
+
+            <button type="submit" id="btn">Register</button>
+
+            <p class="login">
+                Already a user?
+                <a href="login.html">Login</a>
+            </p>
+
+        </form>
+
+        <script>
+
+            document.getElementById("registerForm").addEventListener("submit", function(event){
+
+                event.preventDefault();
+
+                let formData = new FormData(this);
+
+                let user = Object.fromEntries(formData);
+
+                fetch("/register", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(user)
+                })
+
+                .then(response => response.json())
+
+                .then(data => {
+
+                    alert(data.message);
+
+                    if(data.success){
+                        window.location.href = "login.html";
+                    }
+
+                });
+
+            });
+
+        </script>
+
+    </body>
+</html>

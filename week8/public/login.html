@@ -1,0 +1,131 @@
+
+<html>
+    <head>
+        <title>Login-Page</title>
+
+        <meta name="viewport" content="width=device-width">
+        <meta charset="UTF-8">
+
+        <style>
+
+            body{
+                background-color: cyan;
+                background-image: url("./bgimage2.jpg");
+            }
+
+            .heading{
+                color: white;
+                text-align: center;
+                padding-top: 20px;
+            }
+
+            .container{
+                margin-left: auto;
+                margin-right: auto;
+                height: 300px;
+                width: 300px;
+                background-color: lavender;
+                box-shadow: 10px 10px 20px grey;
+                border-radius: 20px;
+                display: flex;
+                flex-direction: column;
+                margin-top: 80px;
+            }
+
+            .container h3{
+                align-self: center;
+            }
+
+            label{
+                margin-top: 20px;
+                color: darkblue;
+                margin-left: 10%;
+                margin-right: 10%;
+            }
+
+            input{
+                display: block;
+                margin-left: 10%;
+                margin-right: 10%;
+                height: 30px;
+            }
+
+            #btn{
+                background-color: darkblue;
+                color: white;
+                width: 80%;
+                align-self: center;
+                margin-top: 30px;
+                height: 30px;
+            }
+
+            .register{
+                text-align: center;
+            }
+
+        </style>
+    </head>
+
+    <body>
+
+        <h1 class="heading">SkillNest</h1>
+
+        <div class="container">
+
+            <h3>User Login</h3>
+
+            <label>Username</label>
+            <input type="text" id="name1" placeholder="Enter your username">
+
+            <label>Password</label>
+            <input type="password" id="password" placeholder="Enter your Password">
+
+            <button onclick="loginUser()" id="btn">Login</button>
+
+            <p class="register">
+                New user?
+                <a href="register.html">Register</a>
+            </p>
+
+        </div>
+
+        <script>
+
+            function loginUser(){
+
+                let username = document.getElementById("name1").value;
+                let password = document.getElementById("password").value;
+
+                fetch("/login", {
+
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+
+                    body: JSON.stringify({
+                        username: username,
+                        password: password
+                    })
+
+                })
+
+                .then(response => response.json())
+
+                .then(data => {
+
+                    alert(data.message);
+
+                    if(data.success){
+                        window.location.href = "success.html";
+                    }
+
+                });
+
+            }
+
+        </script>
+
+    </body>
+</html>
