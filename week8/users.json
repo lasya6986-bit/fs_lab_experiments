@@ -8,5 +8,15 @@
     "gender": "Female",
     "dob": "2006-06-22",
     "skill": "Web Development"
+  },
+  {
+    "fullname": "Behara Lasya ",
+    "username": "lasya_sree",
+    "email": "lasya6986@gmail.com",
+    "password": "4321",
+    "confirmPassword": "4321",
+    "gender": "Female",
+    "dob": "2006-06-22",
+    "skill": "Artificial Intelligence"
   }
 ]
